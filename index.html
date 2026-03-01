@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PVC Pipe Sketcher 3D</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div class="brand">
+        <span class="brand-icon">⬡</span>
+        <div>
+          <div class="brand-title">PVC Sketcher</div>
+          <div class="brand-sub">3D Pipe Designer</div>
+        </div>
+      </div>
+
+      <div class="section-label">ADD COMPONENTS</div>
+
+      <div class="tool-grid">
+        <button class="tool-btn active" data-tool="pipe-h" title="Horizontal Pipe">
+          <span class="tool-icon">━</span>
+          <span>H Pipe</span>
+        </button>
+        <button class="tool-btn" data-tool="pipe-v" title="Vertical Pipe">
+          <span class="tool-icon">┃</span>
+          <span>V Pipe</span>
+        </button>
+        <button class="tool-btn" data-tool="pipe-d" title="Diagonal Pipe">
+          <span class="tool-icon">╱</span>
+          <span>D Pipe</span>
+        </button>
+        <button class="tool-btn" data-tool="elbow" title="90° Elbow">
+          <span class="tool-icon">⌐</span>
+          <span>Elbow</span>
+        </button>
+        <button class="tool-btn" data-tool="tee" title="T-Junction">
+          <span class="tool-icon">⊤</span>
+          <span>Tee</span>
+        </button>
+        <button class="tool-btn" data-tool="cross" title="Cross Junction">
+          <span class="tool-icon">✚</span>
+          <span>Cross</span>
+        </button>
+        <button class="tool-btn" data-tool="cap" title="End Cap">
+          <span class="tool-icon">◑</span>
+          <span>Cap</span>
+        </button>
+        <button class="tool-btn" data-tool="coupler" title="Coupler">
+          <span class="tool-icon">⊞</span>
+          <span>Coupler</span>
+        </button>
+      </div>
+
+      <div class="section-label">PIPE SIZE</div>
+      <div class="pipe-sizes">
+        <button class="size-btn active" data-size="0.5">½"</button>
+        <button class="size-btn" data-size="0.75">¾"</button>
+        <button class="size-btn" data-size="1">1"</button>
+        <button class="size-btn" data-size="1.25">1¼"</button>
+        <button class="size-btn" data-size="1.5">1½"</button>
+        <button class="size-btn" data-size="2">2"</button>
+      </div>
+
+      <div class="section-label">PIPE COLOR</div>
+      <div class="color-row">
+        <div class="color-swatch active" data-color="#e8e0d0" style="background:#e8e0d0" title="Standard White"></div>
+        <div class="color-swatch" data-color="#b0b8c1" style="background:#b0b8c1" title="Gray"></div>
+        <div class="color-swatch" data-color="#5b8dd9" style="background:#5b8dd9" title="Blue"></div>
+        <div class="color-swatch" data-color="#f0a030" style="background:#f0a030" title="Orange"></div>
+        <div class="color-swatch" data-color="#50c878" style="background:#50c878" title="Green"></div>
+        <div class="color-swatch" data-color="#e05050" style="background:#e05050" title="Red"></div>
+      </div>
+
+      <div class="section-label">PIPE LENGTH</div>
+      <div class="length-control">
+        <input type="range" id="lengthSlider" min="1" max="10" step="0.5" value="3" />
+        <span id="lengthVal">3.0 ft</span>
+      </div>
+
+      <div class="section-label">SCENE</div>
+      <div class="scene-btns">
+        <button class="action-btn" id="btnClearSelected">🗑 Delete Selected</button>
+        <button class="action-btn" id="btnClearAll">⚠ Clear All</button>
+        <button class="action-btn" id="btnExport">⬇ Export JSON</button>
+        <button class="action-btn" id="btnImport">⬆ Import JSON</button>
+        <input type="file" id="importFile" accept=".json" style="display:none"/>
+      </div>
+
+      <div class="section-label">CAMERA</div>
+      <div class="scene-btns">
+        <button class="action-btn" id="btnResetCam">↺ Reset View</button>
+        <button class="action-btn" id="btnTopView">⊡ Top View</button>
+        <button class="action-btn" id="btnFrontView">▣ Front View</button>
+      </div>
+
+      <div class="stats-box">
+        <div>Pieces: <span id="statPieces">0</span></div>
+        <div>Total Ft: <span id="statFeet">0.0</span></div>
+      </div>
+    </aside>
+
+    <!-- Canvas Area -->
+    <main id="canvas-wrap">
+      <div id="top-bar">
+        <div class="top-hint" id="modeHint">Click on the 3D canvas to place a component</div>
+        <div class="top-controls">
+          <label class="toggle-label">
+            <input type="checkbox" id="toggleGrid" checked /> Grid
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" id="toggleSnap" checked /> Snap
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" id="toggleShadow" checked /> Shadows
+          </label>
+        </div>
+      </div>
+      <canvas id="three-canvas"></canvas>
+      <div id="context-menu" class="hidden">
+        <div class="ctx-item" id="ctxDelete">🗑 Delete</div>
+        <div class="ctx-item" id="ctxDuplicate">⧉ Duplicate</div>
+        <div class="ctx-item" id="ctxRotateX">↻ Rotate X</div>
+        <div class="ctx-item" id="ctxRotateY">↻ Rotate Y</div>
+        <div class="ctx-item" id="ctxRotateZ">↻ Rotate Z</div>
+      </div>
+      <div id="selection-info" class="hidden">
+        <span id="selInfo">No selection</span>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
