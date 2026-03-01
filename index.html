@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PipeForge 3D — Professional Pipe Sketcher</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <title>PipeForge 3D — Builder</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -12,37 +11,34 @@
 <body>
 <div id="app">
 
-  <!-- ═══ LEFT SIDEBAR ═══ -->
+  <!-- ══ SIDEBAR ══ -->
   <aside id="sidebar">
-
     <div class="brand">
-      <div class="brand-logo">⬡</div>
-      <div>
-        <div class="brand-name">PipeForge</div>
-        <div class="brand-tag">3D Designer</div>
-      </div>
+      <span class="brand-icon">⬡</span>
+      <div><div class="brand-name">PipeForge</div><div class="brand-tag">3D Builder v3</div></div>
     </div>
 
     <div class="tab-row">
       <button class="tab active" data-tab="build">Build</button>
       <button class="tab" data-tab="materials">Materials</button>
       <button class="tab" data-tab="scene">Scene</button>
+      <button class="tab" data-tab="keys">Keys</button>
     </div>
 
-    <!-- ══ BUILD TAB ══ -->
+    <!-- BUILD TAB -->
     <div class="tab-panel active" id="tab-build">
 
-      <div class="section-hdr">PIPES</div>
+      <div class="sh">PIPES &amp; TUBES</div>
       <div class="tool-grid">
-        <button class="tool-btn active" data-tool="pipe-h"><span class="ti">━</span><span>Horizontal</span></button>
-        <button class="tool-btn" data-tool="pipe-v"><span class="ti">┃</span><span>Vertical</span></button>
-        <button class="tool-btn" data-tool="pipe-d"><span class="ti">╱</span><span>Diagonal</span></button>
-        <button class="tool-btn" data-tool="pipe-z"><span class="ti">⌐</span><span>Z-Offset</span></button>
-        <button class="tool-btn" data-tool="flex"><span class="ti">〜</span><span>Flexible</span></button>
-        <button class="tool-btn" data-tool="conduit"><span class="ti">▭</span><span>Conduit</span></button>
+        <button class="tool-btn active" data-tool="pipe-h" title="Horizontal Pipe"><span class="ti">━</span><span>H-Pipe</span></button>
+        <button class="tool-btn" data-tool="pipe-v" title="Vertical Pipe"><span class="ti">┃</span><span>V-Pipe</span></button>
+        <button class="tool-btn" data-tool="pipe-d" title="Diagonal Pipe"><span class="ti">╱</span><span>D-Pipe</span></button>
+        <button class="tool-btn" data-tool="flex" title="Flexible Hose"><span class="ti">〜</span><span>Flex</span></button>
+        <button class="tool-btn" data-tool="conduit" title="Conduit"><span class="ti">▭</span><span>Conduit</span></button>
+        <button class="tool-btn" data-tool="pipe-z" title="Offset Pipe"><span class="ti">⌐</span><span>Z-Offset</span></button>
       </div>
 
-      <div class="section-hdr">FITTINGS</div>
+      <div class="sh">FITTINGS (real-scale)</div>
       <div class="tool-grid">
         <button class="tool-btn" data-tool="elbow-90"><span class="ti">⌐</span><span>90° Elbow</span></button>
         <button class="tool-btn" data-tool="elbow-45"><span class="ti">⌒</span><span>45° Elbow</span></button>
@@ -50,15 +46,31 @@
         <button class="tool-btn" data-tool="cross"><span class="ti">✚</span><span>Cross</span></button>
         <button class="tool-btn" data-tool="wye"><span class="ti">⋎</span><span>Wye</span></button>
         <button class="tool-btn" data-tool="reducer"><span class="ti">◁</span><span>Reducer</span></button>
-        <button class="tool-btn" data-tool="union"><span class="ti">⊞</span><span>Union</span></button>
-        <button class="tool-btn" data-tool="cap"><span class="ti">◑</span><span>End Cap</span></button>
         <button class="tool-btn" data-tool="coupler"><span class="ti">⊟</span><span>Coupler</span></button>
+        <button class="tool-btn" data-tool="cap"><span class="ti">◑</span><span>End Cap</span></button>
+        <button class="tool-btn" data-tool="union"><span class="ti">⊞</span><span>Union</span></button>
         <button class="tool-btn" data-tool="valve"><span class="ti">⊘</span><span>Ball Valve</span></button>
         <button class="tool-btn" data-tool="flange"><span class="ti">⊏</span><span>Flange</span></button>
         <button class="tool-btn" data-tool="bushing"><span class="ti">◎</span><span>Bushing</span></button>
       </div>
 
-      <div class="section-hdr">PIPE SIZE</div>
+      <div class="sh">STRUCTURAL</div>
+      <div class="tool-grid">
+        <button class="tool-btn" data-tool="wood-2x4"><span class="ti">▬</span><span>2×4 Stud</span></button>
+        <button class="tool-btn" data-tool="wood-2x6"><span class="ti">▬</span><span>2×6 Board</span></button>
+        <button class="tool-btn" data-tool="wood-4x4"><span class="ti">■</span><span>4×4 Post</span></button>
+        <button class="tool-btn" data-tool="plywood"><span class="ti">▪</span><span>Plywood Sheet</span></button>
+        <button class="tool-btn" data-tool="osb"><span class="ti">▫</span><span>OSB Sheet</span></button>
+        <button class="tool-btn" data-tool="steel-tube-sq"><span class="ti">□</span><span>SQ Tube</span></button>
+        <button class="tool-btn" data-tool="steel-tube-rnd"><span class="ti">○</span><span>RND Tube</span></button>
+        <button class="tool-btn" data-tool="steel-angle"><span class="ti">⌐</span><span>Angle Iron</span></button>
+        <button class="tool-btn" data-tool="steel-channel"><span class="ti">⊓</span><span>C-Channel</span></button>
+        <button class="tool-btn" data-tool="steel-ibeam"><span class="ti">Ⅰ</span><span>I-Beam</span></button>
+        <button class="tool-btn" data-tool="steel-sheet"><span class="ti">▤</span><span>Steel Sheet</span></button>
+        <button class="tool-btn" data-tool="rebar"><span class="ti">┆</span><span>Rebar</span></button>
+      </div>
+
+      <div class="sh">PIPE SIZE (nominal inches)</div>
       <div class="pipe-sizes">
         <button class="size-btn active" data-size="0.5">½"</button>
         <button class="size-btn" data-size="0.75">¾"</button>
@@ -70,14 +82,24 @@
         <button class="size-btn" data-size="4">4"</button>
       </div>
 
-      <div class="section-hdr">LENGTH</div>
+      <div class="sh">LENGTH (feet)</div>
       <div class="length-row">
-        <input type="range" id="lengthSlider" min="0.5" max="20" step="0.5" value="3"/>
-        <input type="number" id="lengthNum" min="0.5" max="20" step="0.5" value="3" class="num-input"/> <span class="unit-lbl">ft</span>
+        <input type="range" id="lengthSlider" min="0.5" max="20" step="0.5" value="8"/>
+        <input type="number" id="lengthNum" min="0.5" max="20" step="0.5" value="8" class="num-inp"/>
+        <span class="unit">ft</span>
       </div>
 
-      <div class="section-hdr">ROTATION SNAP</div>
-      <div class="rot-snap-row">
+      <div class="sh">PLACEMENT ELEVATION</div>
+      <div class="elev-row">
+        <button class="elev-btn" id="elevDown" title="Lower (↓)">▼</button>
+        <div class="elev-display"><span id="elevVal">0.0</span><span class="unit">ft</span></div>
+        <button class="elev-btn" id="elevUp" title="Raise (↑)">▲</button>
+        <button class="action-btn small" id="elevReset">Floor</button>
+      </div>
+      <div class="elev-hint">↑↓ arrow keys change elevation · Shift+↑↓ = coarse</div>
+
+      <div class="sh">ROTATION SNAP</div>
+      <div class="snap-row">
         <button class="snap-btn active" data-rot="0">Free</button>
         <button class="snap-btn" data-rot="45">45°</button>
         <button class="snap-btn" data-rot="90">90°</button>
@@ -85,213 +107,231 @@
 
     </div><!-- /build -->
 
-    <!-- ══ MATERIALS TAB ══ -->
+    <!-- MATERIALS TAB -->
     <div class="tab-panel" id="tab-materials">
 
-      <div class="section-hdr">MATERIAL CATALOG</div>
-      <div class="mat-list" id="matList">
-        <div class="mat-item active" data-mat="pvc-white">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#f0ece4,#ccc8c0)"></div>
-          <div class="mat-info"><b>PVC Schedule 40</b><span>Standard white · most common</span></div>
-        </div>
-        <div class="mat-item" data-mat="pvc-gray">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#909aa4,#687078)"></div>
-          <div class="mat-info"><b>PVC Schedule 80</b><span>Gray · high pressure rated</span></div>
-        </div>
-        <div class="mat-item" data-mat="cpvc">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#c8a870,#a07838)"></div>
-          <div class="mat-info"><b>CPVC</b><span>Cream/tan · hot water lines</span></div>
-        </div>
-        <div class="mat-item" data-mat="abs">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#383838,#202020)"></div>
-          <div class="mat-info"><b>ABS Plastic</b><span>Matte black · drain &amp; waste</span></div>
-        </div>
-        <div class="mat-item" data-mat="galvanized">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#d0d0c8,#8888808)"></div>
-          <div class="mat-info"><b>Galvanized Steel</b><span>Silver metallic · outdoor use</span></div>
-        </div>
-        <div class="mat-item" data-mat="copper">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#d8824a,#a05828)"></div>
-          <div class="mat-info"><b>Copper Type L</b><span>Warm copper · plumbing</span></div>
-        </div>
-        <div class="mat-item" data-mat="black-iron">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#3c3830,#242018)"></div>
-          <div class="mat-info"><b>Black Iron</b><span>Dark matte · gas lines</span></div>
-        </div>
-        <div class="mat-item" data-mat="stainless">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#e8e8f0,#9898a8)"></div>
-          <div class="mat-info"><b>Stainless Steel 316</b><span>Polished · sanitary/food</span></div>
-        </div>
-        <div class="mat-item" data-mat="hdpe-black">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#1e1e1e,#0a0a0a)"></div>
-          <div class="mat-info"><b>HDPE Black</b><span>Matte black · burial grade</span></div>
-        </div>
-        <div class="mat-item" data-mat="hdpe-yellow">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#f0d840,#c89000)"></div>
-          <div class="mat-info"><b>HDPE Yellow</b><span>Gas-rated poly · utility</span></div>
-        </div>
-        <div class="mat-item" data-mat="pex-red">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#e04040,#a01010)"></div>
-          <div class="mat-info"><b>PEX-A Red</b><span>Flexible · hot water</span></div>
-        </div>
-        <div class="mat-item" data-mat="pex-blue">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#4080d8,#1040a0)"></div>
-          <div class="mat-info"><b>PEX-A Blue</b><span>Flexible · cold water</span></div>
-        </div>
-        <div class="mat-item" data-mat="emt">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#a0c038,#607010)"></div>
-          <div class="mat-info"><b>EMT Conduit</b><span>Zinc-green · electrical</span></div>
-        </div>
-        <div class="mat-item" data-mat="rigid-conduit">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#c0b070,#807030)"></div>
-          <div class="mat-info"><b>Rigid Steel Conduit</b><span>Threaded steel · wiring</span></div>
-        </div>
-        <div class="mat-item" data-mat="orange-conduit">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#f07820,#c04800)"></div>
-          <div class="mat-info"><b>PVC Orange Conduit</b><span>Schedule 40 · underground</span></div>
-        </div>
-        <div class="mat-item" data-mat="fiberglass">
-          <div class="mat-swatch" style="background:linear-gradient(135deg,#d8c8a0,#a89060)"></div>
-          <div class="mat-info"><b>Fiberglass (FRP)</b><span>Tan/beige · corrosion resist</span></div>
-        </div>
+      <div class="sh">PVC &amp; PLASTIC PIPE</div>
+      <div class="mat-list">
+        <div class="mat-item active" data-mat="pvc-white"><div class="ms" style="background:linear-gradient(135deg,#f0ece4,#ccc8c0)"></div><div class="mi"><b>PVC Sch 40</b><small>White · standard</small></div></div>
+        <div class="mat-item" data-mat="pvc-gray"><div class="ms" style="background:linear-gradient(135deg,#909aa4,#687078)"></div><div class="mi"><b>PVC Sch 80</b><small>Gray · high pressure</small></div></div>
+        <div class="mat-item" data-mat="cpvc"><div class="ms" style="background:linear-gradient(135deg,#c8a870,#a07838)"></div><div class="mi"><b>CPVC</b><small>Tan · hot water</small></div></div>
+        <div class="mat-item" data-mat="abs"><div class="ms" style="background:linear-gradient(135deg,#383838,#202020)"></div><div class="mi"><b>ABS</b><small>Black · drain/waste</small></div></div>
+        <div class="mat-item" data-mat="hdpe-black"><div class="ms" style="background:linear-gradient(135deg,#1e1e1e,#0a0a0a)"></div><div class="mi"><b>HDPE Black</b><small>Burial grade</small></div></div>
+        <div class="mat-item" data-mat="hdpe-yellow"><div class="ms" style="background:linear-gradient(135deg,#f0d840,#c89000)"></div><div class="mi"><b>HDPE Yellow</b><small>Gas-rated poly</small></div></div>
+        <div class="mat-item" data-mat="pex-red"><div class="ms" style="background:linear-gradient(135deg,#e04040,#a01010)"></div><div class="mi"><b>PEX Red</b><small>Flex · hot</small></div></div>
+        <div class="mat-item" data-mat="pex-blue"><div class="ms" style="background:linear-gradient(135deg,#4080d8,#1040a0)"></div><div class="mi"><b>PEX Blue</b><small>Flex · cold</small></div></div>
+        <div class="mat-item" data-mat="orange-conduit"><div class="ms" style="background:linear-gradient(135deg,#f07820,#c04800)"></div><div class="mi"><b>Orange Conduit</b><small>Underground PVC</small></div></div>
+        <div class="mat-item" data-mat="fiberglass"><div class="ms" style="background:linear-gradient(135deg,#d8c8a0,#a89060)"></div><div class="mi"><b>Fiberglass FRP</b><small>Corrosion resistant</small></div></div>
       </div>
 
-      <div class="section-hdr">CUSTOM COLOR OVERRIDE</div>
-      <div class="custom-color-row">
+      <div class="sh">METAL</div>
+      <div class="mat-list">
+        <div class="mat-item" data-mat="galvanized"><div class="ms" style="background:linear-gradient(135deg,#d0d0c8,#888880)"></div><div class="mi"><b>Galvanized Steel</b><small>Silver · outdoor</small></div></div>
+        <div class="mat-item" data-mat="copper"><div class="ms" style="background:linear-gradient(135deg,#d8824a,#a05828)"></div><div class="mi"><b>Copper Type L</b><small>Warm copper</small></div></div>
+        <div class="mat-item" data-mat="black-iron"><div class="ms" style="background:linear-gradient(135deg,#3c3830,#242018)"></div><div class="mi"><b>Black Iron</b><small>Gas lines</small></div></div>
+        <div class="mat-item" data-mat="stainless"><div class="ms" style="background:linear-gradient(135deg,#e8e8f0,#9898a8)"></div><div class="mi"><b>Stainless 316</b><small>Polished · sanitary</small></div></div>
+        <div class="mat-item" data-mat="emt"><div class="ms" style="background:linear-gradient(135deg,#a0c038,#607010)"></div><div class="mi"><b>EMT Conduit</b><small>Zinc-green · electrical</small></div></div>
+        <div class="mat-item" data-mat="rigid-conduit"><div class="ms" style="background:linear-gradient(135deg,#c0b070,#807030)"></div><div class="mi"><b>Rigid Conduit</b><small>Threaded steel</small></div></div>
+        <div class="mat-item" data-mat="steel-raw"><div class="ms" style="background:linear-gradient(135deg,#707880,#484e55)"></div><div class="mi"><b>Raw Steel</b><small>Structural · mill finish</small></div></div>
+        <div class="mat-item" data-mat="steel-painted"><div class="ms" style="background:linear-gradient(135deg,#3a4a5a,#1e2a38)"></div><div class="mi"><b>Painted Steel</b><small>Dark gray primer</small></div></div>
+        <div class="mat-item" data-mat="aluminum"><div class="ms" style="background:linear-gradient(135deg,#d8dce0,#a8adb2)"></div><div class="mi"><b>Aluminum</b><small>Lightweight extrusion</small></div></div>
+        <div class="mat-item" data-mat="rebar-mat"><div class="ms" style="background:linear-gradient(135deg,#606060,#383838)"></div><div class="mi"><b>Rebar / Rod</b><small>Deformed steel</small></div></div>
+      </div>
+
+      <div class="sh">WOOD</div>
+      <div class="mat-list">
+        <div class="mat-item" data-mat="wood-pine"><div class="ms" style="background:linear-gradient(135deg,#e8c888,#b89040)"></div><div class="mi"><b>Pine / SPF</b><small>Framing lumber</small></div></div>
+        <div class="mat-item" data-mat="wood-oak"><div class="ms" style="background:linear-gradient(135deg,#c8903c,#8a5820)"></div><div class="mi"><b>Oak / Hardwood</b><small>Furniture grade</small></div></div>
+        <div class="mat-item" data-mat="wood-cedar"><div class="ms" style="background:linear-gradient(135deg,#c07848,#885030)"></div><div class="mi"><b>Cedar</b><small>Decay resistant</small></div></div>
+        <div class="mat-item" data-mat="wood-treated"><div class="ms" style="background:linear-gradient(135deg,#88a060,#506030)"></div><div class="mi"><b>Pressure Treated</b><small>Green-gray · outdoor</small></div></div>
+        <div class="mat-item" data-mat="plywood-mat"><div class="ms" style="background:linear-gradient(135deg,#d0b068,#a07838)"></div><div class="mi"><b>Plywood / OSB</b><small>Sheet goods</small></div></div>
+        <div class="mat-item" data-mat="mdf"><div class="ms" style="background:linear-gradient(135deg,#c8b898,#988070)"></div><div class="mi"><b>MDF</b><small>Smooth fiber board</small></div></div>
+      </div>
+
+      <div class="sh">CUSTOM COLOR</div>
+      <div class="custom-row">
         <input type="color" id="customColor" value="#e8e0d0"/>
-        <button class="action-btn small" id="applyCustomColor">Apply to New</button>
+        <button class="action-btn small" id="applyCustom">Apply</button>
       </div>
 
     </div><!-- /materials -->
 
-    <!-- ══ SCENE TAB ══ -->
+    <!-- SCENE TAB -->
     <div class="tab-panel" id="tab-scene">
 
-      <div class="section-hdr">SELECTED PIECE</div>
-      <div class="sel-panel" id="selPanel">
-        <div class="sel-empty" id="selEmpty">Nothing selected — click a piece</div>
-        <div class="sel-fields hidden" id="selFields">
-          <div class="sel-row"><span>Type</span><span id="selType">—</span></div>
-          <div class="sel-row"><span>Material</span><span id="selMat">—</span></div>
-          <div class="sel-row"><span>Size</span><span id="selSize">—</span></div>
-          <div class="sel-row"><span>Length</span><span id="selLen">—</span></div>
-          <div class="section-hdr" style="padding:10px 0 5px">ROTATE SELECTED</div>
-          <div class="rot-btns">
-            <button class="rq-btn ax" data-axis="x" data-a="45">X+45</button>
-            <button class="rq-btn ax" data-axis="x" data-a="-45">X−45</button>
-            <button class="rq-btn ay" data-axis="y" data-a="45">Y+45</button>
-            <button class="rq-btn ay" data-axis="y" data-a="-45">Y−45</button>
-            <button class="rq-btn az" data-axis="z" data-a="45">Z+45</button>
-            <button class="rq-btn az" data-axis="z" data-a="-45">Z−45</button>
-            <button class="rq-btn" data-axis="x" data-a="90">X+90</button>
-            <button class="rq-btn" data-axis="y" data-a="90">Y+90</button>
-            <button class="rq-btn" data-axis="z" data-a="90">Z+90</button>
-          </div>
-          <div class="section-hdr" style="padding:10px 0 5px">POSITION</div>
+      <div class="sh">SELECTED</div>
+      <div class="sel-panel">
+        <div class="sel-empty" id="selEmpty">Click a piece to select</div>
+        <div class="hidden" id="selFields">
+          <div class="sr"><span>Type</span><span id="s-type">—</span></div>
+          <div class="sr"><span>Material</span><span id="s-mat">—</span></div>
+          <div class="sr"><span>Size</span><span id="s-size">—</span></div>
+          <div class="sr"><span>Length</span><span id="s-len">—</span></div>
+          <div class="sh" style="padding:8px 0 4px">POSITION</div>
           <div class="pos-row">
-            <label>X<input type="number" step="0.5" id="posX" class="pos-input"/></label>
-            <label>Y<input type="number" step="0.5" id="posY" class="pos-input"/></label>
-            <label>Z<input type="number" step="0.5" id="posZ" class="pos-input"/></label>
+            <label>X<input type="number" step="0.5" id="posX" class="pos-inp"/></label>
+            <label>Y<input type="number" step="0.5" id="posY" class="pos-inp"/></label>
+            <label>Z<input type="number" step="0.5" id="posZ" class="pos-inp"/></label>
           </div>
-          <button class="action-btn danger" id="btnDeleteSel" style="margin-top:10px">🗑 Delete</button>
+          <div class="sh" style="padding:8px 0 4px">ROTATE SELECTED</div>
+          <div class="rot-btns">
+            <button class="rq x" data-axis="x" data-a="45">X+45</button>
+            <button class="rq x" data-axis="x" data-a="-45">X-45</button>
+            <button class="rq y" data-axis="y" data-a="45">Y+45</button>
+            <button class="rq y" data-axis="y" data-a="-45">Y-45</button>
+            <button class="rq z" data-axis="z" data-a="45">Z+45</button>
+            <button class="rq z" data-axis="z" data-a="-45">Z-45</button>
+            <button class="rq x" data-axis="x" data-a="90">X+90</button>
+            <button class="rq y" data-axis="y" data-a="90">Y+90</button>
+            <button class="rq z" data-axis="z" data-a="90">Z+90</button>
+          </div>
+          <button class="action-btn" id="btnResetRot" style="margin-top:6px">⊙ Reset Rotation</button>
           <button class="action-btn" id="btnDupSel">⧉ Duplicate</button>
-          <button class="action-btn" id="btnResetRot">⊙ Reset Rotation</button>
+          <button class="action-btn danger" id="btnDelSel">🗑 Delete</button>
         </div>
       </div>
 
-      <div class="section-hdr">CAMERA</div>
-      <div class="scene-btns">
-        <button class="action-btn" id="btnResetCam">↺ Reset View</button>
-        <button class="action-btn" id="btnTopView">⊡ Top (Y)</button>
-        <button class="action-btn" id="btnFrontView">▣ Front (Z)</button>
-        <button class="action-btn" id="btnSideView">◧ Side (X)</button>
+      <div class="sh">CAMERA</div>
+      <div class="sb">
+        <button class="action-btn" id="btnReset3D">↺ 3D View</button>
+        <button class="action-btn" id="btnTopV">⊡ Top</button>
+        <button class="action-btn" id="btnFrontV">▣ Front</button>
+        <button class="action-btn" id="btnSideV">◧ Side</button>
       </div>
 
-      <div class="section-hdr">DISPLAY</div>
-      <div class="toggle-list">
-        <label class="tog"><input type="checkbox" id="toggleGrid" checked/> Grid Floor</label>
-        <label class="tog"><input type="checkbox" id="toggleSnap" checked/> Grid Snap</label>
-        <label class="tog"><input type="checkbox" id="toggleEndSnap" checked/> Endpoint Snap</label>
-        <label class="tog"><input type="checkbox" id="toggleShadow" checked/> Shadows</label>
-        <label class="tog"><input type="checkbox" id="toggleWireframe"/> Wireframe</label>
-        <label class="tog"><input type="checkbox" id="toggleFog" checked/> Depth Fog</label>
-        <label class="tog"><input type="checkbox" id="toggleEndpoints" checked/> Show Endpoints</label>
+      <div class="sh">DISPLAY</div>
+      <div class="tog-list">
+        <label class="tog"><input type="checkbox" id="tGrid" checked/> Grid</label>
+        <label class="tog"><input type="checkbox" id="tSnap" checked/> Grid Snap</label>
+        <label class="tog"><input type="checkbox" id="tEndSnap" checked/> End Snap</label>
+        <label class="tog"><input type="checkbox" id="tEndDots" checked/> Endpoints</label>
+        <label class="tog"><input type="checkbox" id="tShadow" checked/> Shadows</label>
+        <label class="tog"><input type="checkbox" id="tFog" checked/> Fog</label>
+        <label class="tog"><input type="checkbox" id="tWire"/> Wireframe</label>
       </div>
 
-      <div class="section-hdr">FILE</div>
-      <div class="scene-btns">
-        <button class="action-btn danger" id="btnClearAll">⚠ Clear All</button>
+      <div class="sh">FILE</div>
+      <div class="sb">
+        <button class="action-btn danger" id="btnClear">⚠ Clear All</button>
         <button class="action-btn" id="btnExport">⬇ Export JSON</button>
         <button class="action-btn" id="btnImport">⬆ Import JSON</button>
         <input type="file" id="importFile" accept=".json" style="display:none"/>
       </div>
 
       <div class="stats-box">
-        <div class="stat-row"><span>Pieces</span><strong id="statPieces">0</strong></div>
-        <div class="stat-row"><span>Pipe ft</span><strong id="statFeet">0.0</strong></div>
-        <div class="stat-row"><span>Fittings</span><strong id="statFittings">0</strong></div>
+        <div class="stat"><span>Pieces</span><b id="stPieces">0</b></div>
+        <div class="stat"><span>Pipe ft</span><b id="stFeet">0.0</b></div>
+        <div class="stat"><span>Fittings</span><b id="stFit">0</b></div>
       </div>
 
     </div><!-- /scene -->
 
+    <!-- KEYS TAB -->
+    <div class="tab-panel" id="tab-keys">
+      <div class="sh">PLACEMENT</div>
+      <div class="key-list">
+        <div class="key-row"><kbd>Click</kbd><span>Place piece</span></div>
+        <div class="key-row"><kbd>↑</kbd><kbd>↓</kbd><span>Elevation ±0.5 ft</span></div>
+        <div class="key-row"><kbd>Shift+↑</kbd><kbd>↓</kbd><span>Elevation ±2 ft</span></div>
+        <div class="key-row"><kbd>←</kbd><kbd>→</kbd><span>Move ghost X</span></div>
+        <div class="key-row"><kbd>W</kbd><kbd>S</kbd><span>Move ghost Z</span></div>
+        <div class="key-row"><kbd>0</kbd><span>Reset to floor</span></div>
+        <div class="key-row"><kbd>Space</kbd><span>Place at ghost pos</span></div>
+      </div>
+      <div class="sh">ROTATION (selected or ghost)</div>
+      <div class="key-list">
+        <div class="key-row"><kbd>Q</kbd><kbd>E</kbd><span>Rotate Y ±45°</span></div>
+        <div class="key-row"><kbd>R</kbd><kbd>F</kbd><span>Rotate X ±45°</span></div>
+        <div class="key-row"><kbd>T</kbd><kbd>G</kbd><span>Rotate Z ±45°</span></div>
+        <div class="key-row"><kbd>1</kbd><span>Stand vertical</span></div>
+        <div class="key-row"><kbd>2</kbd><span>Lay horizontal X</span></div>
+        <div class="key-row"><kbd>3</kbd><span>Lay horizontal Z</span></div>
+        <div class="key-row"><kbd>Backspace</kbd><span>Reset rotation</span></div>
+      </div>
+      <div class="sh">SELECTION</div>
+      <div class="key-list">
+        <div class="key-row"><kbd>Esc</kbd><span>Deselect</span></div>
+        <div class="key-row"><kbd>Del</kbd><span>Delete selected</span></div>
+        <div class="key-row"><kbd>D</kbd><span>Duplicate</span></div>
+        <div class="key-row"><kbd>Ctrl+Z</kbd><span>Undo</span></div>
+        <div class="key-row"><kbd>Ctrl+Y</kbd><span>Redo</span></div>
+      </div>
+      <div class="sh">CAMERA</div>
+      <div class="key-list">
+        <div class="key-row"><kbd>Right-drag</kbd><span>Orbit</span></div>
+        <div class="key-row"><kbd>Mid-drag</kbd><span>Pan</span></div>
+        <div class="key-row"><kbd>Scroll</kbd><span>Zoom</span></div>
+        <div class="key-row"><kbd>Home</kbd><span>Reset camera</span></div>
+      </div>
+    </div>
+
   </aside>
 
-  <!-- ═══ CANVAS AREA ═══ -->
+  <!-- ══ CANVAS ══ -->
   <main id="canvas-wrap">
-
     <div id="top-bar">
-      <div id="modeHint">Click canvas to place · Right-drag orbit · Scroll zoom · Mid-drag pan</div>
+      <div id="modeHint">Click to place · ↑↓ elevation · Q/E rotate Y · Right-drag orbit</div>
       <div class="top-right">
-        <button class="icon-btn" id="btnUndo" title="Undo Ctrl+Z">↩</button>
-        <button class="icon-btn" id="btnRedo" title="Redo Ctrl+Y">↪</button>
-        <span class="divider"></span>
-        <button class="cam-btn" id="btnP1">3D</button>
-        <button class="cam-btn" id="btnP2">Top</button>
-        <button class="cam-btn" id="btnP3">Front</button>
+        <div class="elev-indicator">Y: <span id="topElev">0.0</span>ft</div>
+        <span class="div"></span>
+        <button class="icon-btn" id="tUndo" title="Undo Ctrl+Z">↩</button>
+        <button class="icon-btn" id="tRedo" title="Redo Ctrl+Y">↪</button>
+        <span class="div"></span>
+        <button class="cam-btn" id="c3d">3D</button>
+        <button class="cam-btn" id="cTop">Top</button>
+        <button class="cam-btn" id="cFront">Front</button>
       </div>
     </div>
 
     <canvas id="three-canvas"></canvas>
 
-    <!-- Floating gizmo for selected piece -->
-    <div id="gizmo-panel" class="hidden">
-      <div class="gizmo-title">Rotate Selected</div>
-      <div class="gizmo-row">
-        <button class="gizmo-btn gx" data-axis="x" data-dir="-1">−X</button>
-        <button class="gizmo-btn gx" data-axis="x" data-dir="1">+X</button>
-        <button class="gizmo-btn gy" data-axis="y" data-dir="-1">−Y</button>
-        <button class="gizmo-btn gy" data-axis="y" data-dir="1">+Y</button>
-        <button class="gizmo-btn gz" data-axis="z" data-dir="-1">−Z</button>
-        <button class="gizmo-btn gz" data-axis="z" data-dir="1">+Z</button>
+    <!-- Floating gizmo -->
+    <div id="gizmo" class="hidden">
+      <div class="giz-title">Rotate</div>
+      <div class="giz-row">
+        <button class="gb gx" data-axis="x" data-dir="-1">−X</button>
+        <button class="gb gx" data-axis="x" data-dir="1">+X</button>
+        <button class="gb gy" data-axis="y" data-dir="-1">−Y</button>
+        <button class="gb gy" data-axis="y" data-dir="1">+Y</button>
+        <button class="gb gz" data-axis="z" data-dir="-1">−Z</button>
+        <button class="gb gz" data-axis="z" data-dir="1">+Z</button>
       </div>
     </div>
 
     <!-- Snap indicator -->
     <div id="snap-dot" class="hidden"></div>
 
-    <!-- Selection bar at bottom -->
-    <div id="selection-bar" class="hidden">
-      <span id="selBarText">—</span>
-      <div class="selbar-actions">
-        <button class="selbar-btn" id="sbRotY">⟳Y</button>
-        <button class="selbar-btn" id="sbRotX">⟳X</button>
-        <button class="selbar-btn" id="sbRotZ">⟳Z</button>
-        <button class="selbar-btn danger" id="sbDelete">🗑</button>
+    <!-- Elevation crosshair lines -->
+    <div id="elev-cross" class="hidden">
+      <div class="elev-h"></div>
+      <div class="elev-v"></div>
+    </div>
+
+    <!-- Selection bar -->
+    <div id="sel-bar" class="hidden">
+      <span id="sel-text">—</span>
+      <div class="sb-acts">
+        <button class="sb-btn" title="Y+45 (Q)">Q:⟳Y</button>
+        <button class="sb-btn" title="X+45 (R)">R:⟳X</button>
+        <button class="sb-btn" title="Z+45 (T)">T:⟳Z</button>
+        <button class="sb-btn danger" id="sbDel">Del</button>
       </div>
     </div>
 
-    <!-- Context Menu -->
-    <div id="context-menu" class="hidden">
-      <div class="ctx-item" id="ctxDelete">🗑 Delete</div>
-      <div class="ctx-item" id="ctxDuplicate">⧉ Duplicate</div>
-      <div class="ctx-sep"></div>
-      <div class="ctx-item" id="ctxRX">↻ +X 45°</div>
-      <div class="ctx-item" id="ctxRY">↻ +Y 45°</div>
-      <div class="ctx-item" id="ctxRZ">↻ +Z 45°</div>
-      <div class="ctx-sep"></div>
-      <div class="ctx-item" id="ctxFlatH">⊡ Lay Horizontal</div>
-      <div class="ctx-item" id="ctxFlatV">⊡ Stand Vertical</div>
-      <div class="ctx-item" id="ctxResetRot">⊙ Reset Rotation</div>
+    <!-- Context menu -->
+    <div id="ctx-menu" class="hidden">
+      <div class="ci" id="ciDup">⧉ Duplicate</div>
+      <div class="ci" id="ciDel">🗑 Delete</div>
+      <div class="c-sep"></div>
+      <div class="ci" id="ciRX">↻ Rotate +X 45°</div>
+      <div class="ci" id="ciRY">↻ Rotate +Y 45°</div>
+      <div class="ci" id="ciRZ">↻ Rotate +Z 45°</div>
+      <div class="c-sep"></div>
+      <div class="ci" id="ciHoriz">⊡ Lay Horizontal</div>
+      <div class="ci" id="ciVert">⊡ Stand Vertical</div>
+      <div class="ci" id="ciReset">⊙ Reset Rotation</div>
+      <div class="c-sep"></div>
+      <div class="ci" id="ciToFloor">↓ Move to Floor</div>
     </div>
 
   </main>
